@@ -89,7 +89,7 @@ module.exports = msgHandler = async (client, message) => {
                        if (message.duration < 15) {
                        sendSticker.sendAnimatedSticker(message)
                        } else {
-                       await client.reply(from, 'The given file is too large for converting', id)
+                       await client.reply(from, 'El archivo dado es demasiado grande para convertir', id)
                        }
                     } else if (type == 'image') {
                       const mediaData = await decryptMedia(message)
@@ -105,10 +105,10 @@ module.exports = msgHandler = async (client, message) => {
                           if (message.duration < 15) {
                           sendSticker.sendAnimatedSticker(message)
                           } else {
-                          await client.reply(from, 'The given file is too large for converting', id)
+                          await client.reply(from, 'El archivo dado es demasiado grande para convertir', id)
                           }
                 } else {
-                  client.reply(from, 'You did not tag a picture or video, Baka', message.id)
+                  client.reply(from, 'No etiquetaste una foto o video, Baka >~<', message.id)
                     }
                 break
             break
@@ -174,13 +174,13 @@ module.exports = msgHandler = async (client, message) => {
                     client.sendPtt(from, './media/tts/resJp.mp3', message.id)
                 })
 		    } else {
-		        client.reply(from, 'Currently only English and Japanese are supported!', message.id)
+		        client.reply(from, '¡Actualmente solo se admiten inglés y japonés!', message.id)
             }
             break 
         case 'quotemaker':
             arg = body.trim().split('|')
             if (arg.length >= 3) {
-            client.reply(from, 'Processing...', message.id) 
+            client.reply(from, 'Procesando...', message.id) 
             const quotes = arg[1]
             const author = arg[2]
             const theme = arg[3]
@@ -188,10 +188,10 @@ module.exports = msgHandler = async (client, message) => {
             const resolt = await quotemaker(quotes, author, theme)
             client.sendFile(from, resolt, 'quotesmaker.jpg','...')
             } catch {
-            client.reply(from, 'It looks like that the image failed to process', message.id)
+            client.reply(from, 'Parece que la imagen no se pudo procesar', message.id)
             }
             } else {
-            client.reply(from, 'Usage: \n#quotemaker | quote | author', message.id)
+            client.reply(from, 'Use: \n#quotemaker | quote | author', message.id)
             }
             break
        case 'poll':
@@ -208,12 +208,12 @@ module.exports = msgHandler = async (client, message) => {
             break
        case 'translate':
             arg = body.trim().split(' ')
-            if (arg.length != 2) return client.reply(from, 'Wrong Format!', id)
-            if (!quotedMsg) return client.reply(from, 'Wrong Format!', id)
+            if (arg.length != 2) return client.reply(from, '¡Formato erróneo!', id)
+            if (!quotedMsg) return client.reply(from, '¡Formato erróneo!', id)
             const quoteText = quotedMsg.type == 'chat' ? quotedMsg.body : quotedMsg.type == 'image' ? quotedMsg.caption : ''
             translate(quoteText, arg[1])
                 .then((result) => client.sendText(from, result))
-                .catch(() => client.sendText(from, 'An error occured!'))
+                .catch(() => client.sendText(from, '¡Ocurrió un error!'))
             break
         case 'waifu':
             const waifu = await axios.get('https://mhankbarbar.herokuapp.com/api/waifu')
@@ -234,7 +234,7 @@ module.exports = msgHandler = async (client, message) => {
                 var cvk = await client.getChatById(ids)
                 if (!cvk.isReadOnly) client.sendText(ids, `${msg}`)
             }
-            client.reply(from, 'Broadcast Success!', message.id)
+            client.reply(from, '¡Éxito en la transmisión!', message.id)
             break
         case 'user':
         const username = body.slice(6)
@@ -443,13 +443,13 @@ Plan to Read: ${jikan.manga_stats.plan_to_read}`
             }
             await client.sendFileFromUrl(from, pfp, 'group.png', `*${groupname}* 
 
-🌐️ *Members: ${totalMem}*
+🌐️ *MIEMBROS: ${totalMem}*
 
-💌️ *Welcome: ${welgrp}*
+💌️ *BIENVENIDA: ${welgrp}*
 
 ⚜️ *NSFW: ${ngrp}*
 
-📃️ *Group Description* 
+📃️ *DESCRIPCION DEL GRUPO* 
 
 ${desc}`)
         break
@@ -546,15 +546,15 @@ ${desc}`)
               }
             const { title, synopsis, episodes, url, rated, score, image_url } = parsed.results[0]
             const content = `*Anime Found!*
-✨️ *Title:* ${title}
+✨️ *Titulo:* ${title}
 
-🎆️ *Episodes:* ${episodes}
+🎆️ *Episodios:* ${episodes}
 
-💌️ *Rating:* ${rated}
+💌️ *Clasificación:* ${rated}
 
-❤️ *Score:* ${score}
+❤️ *Puntuación:* ${score}
 
-💚️ *Synopsis:* ${synopsis}
+💚️ *Sinopsis:* ${synopsis}
 
 🌐️ *URL*: ${url}`
 
